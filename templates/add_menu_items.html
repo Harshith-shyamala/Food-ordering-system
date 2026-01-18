@@ -1,0 +1,75 @@
+{% include'rhead.html' %}
+
+<div class="mt-10">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 ">
+            <div class="card card-shadow mt-40 p-15">
+                <div class="title text-center">Add Menu Items</div>
+
+            <form action="add_menu_items_action" method="post" enctype="multipart/form-data">
+                <div class="mt-10">
+                    <label>Food Category</label>
+                    <select class="form-control" name="food_categories_id" required>
+                        <option selected="selected" disabled value="">Select Food Category</option>
+                        {% for food_category in food_categories %}
+                        <option value="{{food_category['_id']}}">{{food_category['food_category_name']}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mt-5">
+                    <label for="food_name" >Food Name</label>
+                    <div class="form-group">
+                        <input type="text" id="food_name" name="food_name" class="form-control" required placeholder="Enter Food Item Name">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag form-icon" viewBox="0 0 16 16">
+                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <label for="price">Price</label>
+                    <div class="form-group">
+                        <input type="text" name="price" id="price" class="form-control" placeholder="Enter Food Price" required>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-dollar form-icon" viewBox="0 0 16 16">
+                            <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <label for="quantity">Quantity</label>
+                    <div class="form-group">
+                        <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Enter Quantity" required>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack form-icon" viewBox="0 0 16 16">
+                            <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.6.6 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.6.6 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.6.6 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535z"/>
+                            <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.6.6 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0z"/>
+                      </svg>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <label for="picture">Picture</label>
+                    <div class="form-group">
+                        <input type="file" class="mt-5" name="picture" id="picture" required>
+                    </div>
+
+                </div>
+                <div class="mt-5">
+                    <label for="description">Description</label>
+                     <textarea name="description" id="description" class="form-control" placeholder="Describe about product"></textarea>
+
+                <div class="mt-5">
+                    <input type="submit" class="btn btn-primary mt-15" value="Add Food Item">
+                </div>
+                <div class="mt-10 h5">
+                {% if message!=None %}
+                  <p>{{message}}</p>
+                {% endif %}
+            </div>
+        </div>
+            </form>
+
+            </div>
+
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>

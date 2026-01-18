@@ -1,0 +1,9 @@
+{% if session['role']=='Customer' %}
+    {% include 'chead.html'%}
+{% elif session['role']=='Restaurant' %}
+    {% include 'rhead.html'%}
+{% elif session['role']=='Delivery Boy' %}
+    {% include 'dbhead.html'%}
+{% endif %}
+
+<div class="text-title text-center mt-150">{{message}}</div>

@@ -1,0 +1,114 @@
+{% if session['role']=="Restaurant" %}
+    {% include 'rhead.html' %}
+{% endif %}
+
+{% if session['role']=="Customer" %}
+    {% include 'chead.html' %}
+{% endif %}
+
+<div class="row">
+    <div class="col-10">
+        {% if session['role']=="Restaurant" %}
+        <div class="text-center mt-15 text-title">
+            View Food Items
+          </div>
+    </div>
+    <div class="col-2 p-15">
+        <button class="btn" ><a class="href" href="/add_menu_items" >Add Menu Items</a></button>
+        {% endif %}
+    </div>
+</div>
+
+{% if session['role']=="Customer" %}
+<form action="view_menu_items">
+  <div class="mt-10">
+    <div class="row">
+        <div class="col-3">
+            <div class="p-10">
+                <form action="view_menu_items">
+                  <div><label for="restaurant_id">Select By Restaurant</label></div>
+                    <div class="form-group">
+                        <select class="form-control" name="restaurant_id" id="restaurant_id" onchange="this.form.submit()">
+                            <option value="" selected="selected" disabled >Please Select Restaurant</option>
+                            {% for restaurant in restaurants %}
+                            <option value="{{restaurant['_id']}}"{% if str(restaurant['_id'])==str(restaurant_id) %} selected {% endif %} > {{restaurant['restaurant_name']}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="p-10">
+              <div><label for="food_categories_id">Select By Food Category</label></div>
+                    <div class="form-group">
+                        <select class="form-control" name="food_categories_id" id="food_categories_id" onchange="this.form.submit()">
+                            <option value="" selected="selected" disabled >Please Select Food Category</option>
+                            {% for food_category in food_categories %}
+                            <option value="{{food_category['_id']}}"{% if str(food_category['_id'])==str(food_category_id) %} selected {% endif %} >{{food_category['food_category_name']}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="p-10">
+              <div><label for="location_id">Select By Location</label></div>
+                    <div class="form-group">
+                        <select class="form-control" name="location_id" id="location_id" onchange="this.form.submit()">
+                            <option value="" selected="selected" disabled >Please Select Location</option>
+                            {% for location in locations %}
+                            <option value="{{location['_id']}}"{% if str(location['_id'])==str(location_id) %} selected {% endif %} >{{location['location_name']}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="p-10">
+              <div><label for="food_name">Search Food Item By Name</label></div>
+                    <input type="text" id="food_name" name="food_name" class="form-control" value="{{food_name}}" onchange="this.form.submit()" placeholder="Enter Food Item Name" autofocus>
+            </div>
+        </div>
+    </div>
+  </div>
+</form>
+{% endif %}
+
+<div class="row ">
+    {% for menu_item in menu_items %}
+    {% set restaurant=get_restaurant_name_by_restaurant(menu_item['restaurant_id'])%}
+    {% set food_category=get_food_category_name_by_food_category(menu_item['food_categories_id'])%}
+    <div class="col-3 p-10">
+        <div class="card">
+            <div class="text-center">
+                <img src="../static/picture/{{menu_item['picture']}}" class="product-img">
+            </div>
+            <div>
+                <div class="text-title-2 mt-10">{{menu_item['food_name']}}</div>
+                <div class="text-title-2 mt-5">$ {{menu_item['price']}}</div>
+                <div class="mt-5">Quantity : {{menu_item['quantity']}}</div>
+                <div class="mt-5">Restaurant : {{restaurant['restaurant_name']}}</div>
+                <div class="mt-5 description">{{menu_item['description']}}</div>
+            </div>
+            {% if session['role']=="Customer" %}
+            <form action="add_to_cart" method="post">
+                <input type="hidden" name="menu_item_id" value="{{menu_item['_id']}}">
+                <div class="row">
+                  <div class="col-6"><input type="number" name="quantity" placeholder="Enter Quantity" min="1" max="" class="form-control" required></div>
+                  <div class="col-6"><input type="submit" value="Add to Cart" class="btn btn-primary"></div>
+                </div>
+              </form>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+

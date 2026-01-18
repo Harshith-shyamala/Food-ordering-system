@@ -1,0 +1,48 @@
+{% include 'ahead.html' %}
+
+<div class="bg-main-1">
+  <div class="text-title text-center p-50">
+    View Delivery Boys
+  </div>
+  
+  <div class="scro-1 p-10">
+      <table class="table" border="1">
+        <thead class="">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Zip-Code</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+       </thead>
+       <tbody>
+        {% for delivery_boy in delivery_boys %}
+          <tr>
+            <td class="text-center">{{delivery_boy['name']}}</td>
+            <td class="text-center">{{delivery_boy['email']}}</td>
+            <td class="text-center">{{delivery_boy['phone']}}</td>
+            <td class="text-center">{{delivery_boy['address']}}</td>
+            <td class="text-center">{{delivery_boy['state']}}</td>
+            <td class="text-center">{{delivery_boy['city']}}</td>
+            <td class="text-center">{{delivery_boy['zip_code']}}</td>
+            <td class="text-center">{{delivery_boy['status']}}</td>
+            <td class="text-center">
+                      {% if delivery_boy['status']=='unauthorized' %}
+                      <button class=""><a class="ahref-aurthor btn btn-info" href="/authorize_delivery_boy?delivery_boy_id={{delivery_boy['_id']}}">Aurthorize Now</a></button>
+                      {% else %}
+                      <button><a class="ahref-unaurthor btn btn-danger" href="/unauthorize_delivery_boy?delivery_boy_id={{delivery_boy['_id']}}">Unaurthorize Now</a></button>
+                      {% endif %}
+                    </td>
+            
+                  </tr>
+                {% endfor %}
+         </tbody>
+       </table>
+  </div>
+</div>
+

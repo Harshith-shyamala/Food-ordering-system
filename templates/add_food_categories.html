@@ -1,0 +1,56 @@
+{% include'ahead.html' %}
+
+<div class="row bg-main-1">
+   <div class="col-6 mt-150">
+      <div class="card card-2-width p-20">
+         <div class="title text-center">Add Food Category</div>
+         <form action="add_food_categories_action" method="post">
+            <div class="mt-20">
+              <label for="food_category_name">Food Category Name</label>
+              <div class="form-group mt-5">
+               <input type="text" name="food_category_name" id="food_category_name" class="form-control" required placeholder="Add Food Category">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags form-icon" viewBox="0 0 16 16">
+                  <path d="M3 2v4.586l7 7L14.586 9l-7-7zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586z"/>
+                  <path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1z"/>
+               </svg>
+              </div>
+            </div>
+          
+              <input type="submit" class="btn btn-primary p-5 h5 mt-20" value="Add">
+          
+          </form>
+          <div class="mt-10 h5">
+                {% if message!=None %}
+                  <p>{{message}}</p>
+                {% endif %}
+            </div>
+      </div>
+   </div>
+   <div class="col-6  p-50">
+      <div class="card p-15">
+         <div class="title text-center">View Food Categories</div>
+      <div class="scro">
+         <table border="1" class="table mt-10">
+            <thead>
+               <tr>
+                   <th>Food Category Name</th>
+                   <th>Edit</th>
+                   <th>Delete</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for food_category in food_categories %}
+               <tr>
+                  <td>{{food_category['food_category_name']}}</td>
+                  <td><a class=" btn btn-secondary" href="edit_food_categories?food_category_id={{food_category['_id']}}">Edit</a></td>
+                  <td><a class=" btn btn-danger" href="delete_food_categories?food_category_id={{food_category['_id']}}">Delete</a></td>
+               </tr>
+               {% endfor %}
+            </tbody>
+        </table>
+      </div>
+      </div>
+      
+      
+   </div>
+</div>

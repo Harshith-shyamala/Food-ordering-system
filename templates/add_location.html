@@ -1,0 +1,61 @@
+{% include'ahead.html' %}
+
+<div class="row bg-main-1  ">
+   <div class="col-6 mt-150 ">
+      <div class="card card-2-width p-20">
+         <div class="title text-center">Add Location</div>
+         <form action="add_location_action" method="post">
+            <div class="mt-20">
+              <label for="location_name" style="font-weight: bold;">Location Name</label>
+              <div class="form-group mt-5">
+               <input type="text" name="location_name" id="location_name" class="form-control" required placeholder="Add Location">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt form-icon" viewBox="0 0 16 16">
+                  <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                  <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+              </svg>
+              </div>
+            </div>
+          
+              <input type="submit" class="btn btn-primary p-5 h5 mt-20" value="Add">
+
+          
+          </form>
+          <div class="mt-10 h5">
+                {% if message!=None %}
+                  <p>{{message}}</p>
+                {% endif %}
+            </div>
+      </div>
+   </div>
+   <div class="col-6 p-50">
+      <div class="card p-15">
+         <div class="title text-center ">View Locations</div>
+         <div class="scro">
+            <table border="1" class="table mt-10">
+               <thead>
+                  <tr>
+                      <th>Location Name</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for location in locations %}
+                  <tr>
+                     <td>{{location['location_name']}}</td>
+                     <td><a class=" btn btn-secondary" href="edit_location?location_id={{location['_id']}}">Edit</a></td>
+                     <td><a class=" btn btn-danger" href="delete_location?location_id={{location['_id']}}">Delete</a></td>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+           </table>
+         </div>
+      
+      </div>
+   </div>
+</div>
+
+
+
+
+

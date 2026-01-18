@@ -1,0 +1,23 @@
+{% include 'ahead.html' %}
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="card mt-100">
+            <div class="title text-center">Edit Food Category</div>
+            <form action="/edit_food_categories_action" method="post">
+                <div>
+                    <input type="hidden" name="food_category_id" value="{{ food_category['_id'] }}">
+                </div>
+                <div class="mt-30">
+                    <label class="form-group" for="food_category_name" style="font-weight: bold;">Food Category Name</label>
+                    <input class="form-control" type="text" id="food_category_name" name="food_category_name" value="{{ food_category['food_category_name'] }}">
+                </div>
+                <div class="p-20">
+                    <input class="btn btn-primary p-5 h5 mt-20" type="submit" value="Update">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-4"></div>
+</div>

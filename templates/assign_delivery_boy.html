@@ -1,0 +1,41 @@
+{% if session['role']=='Customer' %}
+    {% include 'chead.html'%}
+{% elif session['role']=='Restaurant' %}
+    {% include 'rhead.html'%}
+{% elif session['role']=='Delivery Boy' %}
+    {% include 'dbhead.html'%}
+{% endif %}
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="card mt-180">
+            <form action="assign_now">
+                {% if session['role']=='Customer' %}
+                    <div class="text-title text-center">Select Delivery Boy</div>
+
+                           {% elif session['role']=='Restaurant' %}
+                                <div class="text-title text-center">Assign Delivery Boy</div>
+
+                                   {% endif %}
+                <div>
+                    <input type="hidden" name="order_id" value="{{order_id}}">
+                </div>
+                <div class="mt-20">
+                    <label>Choose Delivery Boy</label>
+                    <select class="form-control" name="delivery_boy_id" >
+                        <option value="" disabled="disabled" selected >Choose Delivery Boy</option>
+                        {% for delivery_boy in delivery_boys %}
+                        <option value="{{delivery_boy['_id'] }}">{{delivery_boy['first_name']}}      - [{{delivery_boy['status2']}}]</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <input type="submit" value="Assign" class="btn btn-info mt-10">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-4"></div>
+</div>
+

@@ -1,0 +1,33 @@
+{% include 'dbhead.html' %}
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4 mt-150">
+    <div class="card">
+        <div class="title text-center">Delivery Boy Profile</div>
+    <div class="p-5">
+        Name: {{delivery_boy['first_name']}}
+    </div>
+    <div class="p-5">
+        Email: {{delivery_boy['email']}}
+    </div>
+    <div class="p-5">
+        Phone: {{delivery_boy['phone']}}
+    </div>
+    <div class="p-5">
+        Status: {{delivery_boy['status']}}
+    </div>
+    <div class="p-5">
+        Marked Status: {{delivery_boy['status2']}}
+    </div>
+    <div class="mt-20">
+        {% if delivery_boy['status2']=='Available' %}
+        <a class="ahref-unaurthor btn btn-danger" href="/unavailable?delivery_boy_id={{delivery_boy['_id']}}">Unavailable Now</a>
+        {% else %}
+        <a class="ahref-aurthor btn btn-info" href="/available?delivery_boy_id={{delivery_boy['_id']}}">Available Now</a>
+        {% endif %}
+    </div>
+    </div>
+    </div>
+<div class="col-4"></div>
+</div>

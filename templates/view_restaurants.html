@@ -1,0 +1,43 @@
+{% include 'ahead.html' %}
+
+<div class="bg-main-1">
+  <div class="">
+    <div class="text-title text-center p-50">
+      View Restaurants
+    </div>
+    
+    <div class="scro-1 p-10">
+        <table border="1" class="table">
+          <thead class="">
+            <tr>
+              <th >Restaurant Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+          {% for restaurant in restaurants %}
+            <tr>
+              <td class="text-center">{{restaurant['restaurant_name']}}</td>
+              <td class="text-center">{{restaurant['email']}}</td>
+              <td class="text-center">{{restaurant['phone']}}</td>
+              <td class="text-center">{{restaurant['address']}}</td>
+              <td class="text-center">{{restaurant['status']}}</td>
+              <td class="text-center">
+                        {% if restaurant['status']=='unauthorized' %}
+                        <button ><a class="ahref-aurthor btn btn-info" href="/authorize_restaurant?restaurant_id={{restaurant['_id']}}">Aurthorize Now</a></button>
+                        {% else %}
+                        <button><a class="ahref-unaurthor btn btn-danger" href="/unauthorize_restaurant?restaurant_id={{restaurant['_id']}}">Unaurthorize Now</a></button>
+                        {% endif %}
+                      </td>
+              
+                    </tr>
+                  {% endfor %}
+           </tbody>
+         </table>
+    </div>
+  </div>
+</div>

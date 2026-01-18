@@ -1,0 +1,34 @@
+{% if session['role']=='Customer' %}
+    {% include 'chead.html'%}
+{% elif session['role']=='Restaurant' %}
+    {% include 'rhead.html'%}
+{% elif session['role']=='Delivery Boy' %}
+    {% include 'dbhead.html'%}
+{% endif %}
+
+<div class="text-title text-center mt-10">
+  Payment
+</div>
+{% set order = get_order_by_order_id(order_id) %}
+{% set customer = get_customer_name_by_customer(order["customer_id"]) %}
+<div class="p-30">
+    <table border="1" class="table">
+      <thead class="">
+        <tr>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Customer</th>
+          <th>Status</th>
+        </tr>
+     </thead>
+     <tbody>
+        <tr>
+              <td class="text-center">${{order['total_price']}} {% if 'total_price' in payment%} Combine Order $ {{payment['total_price']}} {% endif%}</td>
+              <td class="text-center">{{payment['date']}}</td>
+              <td class="text-center">{{customer['first_name']}}</td>
+              <td class="text-center">{{payment['status']}}</td>
+          </tr>
+       </tbody>
+     </table>
+</div>
+
